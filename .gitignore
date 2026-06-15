@@ -1,0 +1,18 @@
+# Build output
+target/
+
+# Local tool caches
+.tools/
+.mvn/wrapper/dists/
+
+# IDE/editor
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
