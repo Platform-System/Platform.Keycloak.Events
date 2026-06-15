@@ -1,5 +1,9 @@
 # Build output
 target/
+*.class
+*.jar
+*.war
+*.ear
 
 # Local tool caches
 .tools/
@@ -9,10 +13,16 @@ target/
 .idea/
 .vscode/
 *.iml
+.classpath
+.project
+.settings/
 
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Logs
 *.log
+hs_err_pid*
+replay_pid*
