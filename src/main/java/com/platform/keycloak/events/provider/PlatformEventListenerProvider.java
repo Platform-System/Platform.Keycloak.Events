@@ -29,19 +29,19 @@ public final class PlatformEventListenerProvider implements EventListenerProvide
             return;
         }
 
-        if (event.getType() != EventType.REGISTER) {
+        if (event.getType() != EventType.REGISTER && event.getType() != EventType.LOGIN) {
             return;
         }
 
         RealmModel realm = session.getContext().getRealm();
         if (realm == null) {
-            LOGGER.warn("Skipping registration event because realm context is missing.");
+            LOGGER.warnf("Skipping %s event because realm context is missing.", event.getType());
             return;
         }
 
         UserModel user = session.users().getUserById(realm, event.getUserId());
         if (user == null) {
-            LOGGER.warnf("Skipping registration event because user %s could not be loaded from Keycloak.", event.getUserId());
+            LOGGER.warnf("Skipping %s event because user %s could not be loaded from Keycloak.", event.getType(), event.getUserId());
             return;
         }
 

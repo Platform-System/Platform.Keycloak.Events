@@ -18,17 +18,17 @@ public final class RegistrationEventProcessor {
     }
 
     public void process(EventType eventType, String userId, String userName, String email, Instant occurredAt) {
-        if (eventType != EventType.REGISTER) {
+        if (eventType != EventType.REGISTER && eventType != EventType.LOGIN) {
             return;
         }
 
         if (userId == null || userId.isBlank()) {
-            LOGGER.warn("Skipping registration event because userId is missing.");
+            LOGGER.warnf("Skipping %s event because userId is missing.", eventType);
             return;
         }
 
         if (userName == null || userName.isBlank() || email == null || email.isBlank()) {
-            LOGGER.warnf("Skipping registration event for user %s because username/email is missing.", userId);
+            LOGGER.warnf("Skipping %s event for user %s because username/email is missing.", eventType, userId);
             return;
         }
 
@@ -36,7 +36,7 @@ public final class RegistrationEventProcessor {
         try {
             parsedUserId = UUID.fromString(userId);
         } catch (IllegalArgumentException exception) {
-            LOGGER.warnf(exception, "Skipping registration event because userId %s is not a valid UUID.", userId);
+            LOGGER.warnf(exception, "Skipping %s event because userId %s is not a valid UUID.", eventType, userId);
             return;
         }
 
@@ -48,7 +48,7 @@ public final class RegistrationEventProcessor {
                 email,
                 occurredAt));
         } catch (Exception exception) {
-            throw new RuntimeException("Failed to publish identity registration event to Kafka.", exception);
+            throw new RuntimeException("Failed to publish identity event to Kafka.", exception);
         }
     }
 }
