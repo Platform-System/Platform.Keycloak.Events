@@ -17,7 +17,7 @@ public final class RegistrationEventProcessor {
         this.publisher = publisher;
     }
 
-    public void process(EventType eventType, String userId, String userName, String email, Instant occurredAt) {
+    public void process(EventType eventType, String userId, String userName, String email, String firstName, String lastName, Instant occurredAt) {
         if (eventType != EventType.REGISTER && eventType != EventType.LOGIN) {
             return;
         }
@@ -46,6 +46,8 @@ public final class RegistrationEventProcessor {
                 parsedUserId,
                 userName,
                 email,
+                firstName,
+                lastName,
                 occurredAt));
         } catch (Exception exception) {
             throw new RuntimeException("Failed to publish identity event to Kafka.", exception);

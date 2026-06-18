@@ -50,6 +50,8 @@ public final class PlatformEventListenerProvider implements EventListenerProvide
             event.getUserId(),
             user.getUsername(),
             user.getEmail(),
+            user.getFirstName(),
+            user.getLastName(),
             Instant.ofEpochMilli(event.getTime()));
     }
 

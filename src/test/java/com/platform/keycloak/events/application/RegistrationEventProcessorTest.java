@@ -22,10 +22,14 @@ class RegistrationEventProcessorTest {
             "92f5a1dd-7e59-4ad8-bcc1-b8ceab6eff61",
             "hung",
             "hung@example.com",
+            "Khanh",
+            "Hung",
             Instant.parse("2026-06-12T10:00:00Z"));
 
         assertEquals(1, publisher.messages.size());
         assertEquals("hung@example.com", publisher.messages.get(0).getEmail());
+        assertEquals("Khanh", publisher.messages.get(0).getFirstName());
+        assertEquals("Hung", publisher.messages.get(0).getLastName());
     }
 
     @Test
@@ -38,6 +42,8 @@ class RegistrationEventProcessorTest {
             "92f5a1dd-7e59-4ad8-bcc1-b8ceab6eff61",
             "hung",
             "hung@example.com",
+            "Khanh",
+            "Hung",
             Instant.parse("2026-06-12T10:00:00Z"));
 
         assertEquals(1, publisher.messages.size());
@@ -54,6 +60,8 @@ class RegistrationEventProcessorTest {
             "92f5a1dd-7e59-4ad8-bcc1-b8ceab6eff61",
             "hung",
             "hung@example.com",
+            "Khanh",
+            "Hung",
             Instant.parse("2026-06-12T10:00:00Z"));
 
         assertEquals(0, publisher.messages.size());
@@ -69,6 +77,8 @@ class RegistrationEventProcessorTest {
             "92f5a1dd-7e59-4ad8-bcc1-b8ceab6eff61",
             "hung",
             "",
+            "Khanh",
+            "Hung",
             Instant.parse("2026-06-12T10:00:00Z"));
 
         assertEquals(0, publisher.messages.size());
